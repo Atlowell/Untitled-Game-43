@@ -12,6 +12,7 @@ public class Player {
 	private ArrayList<Armor> armor;
 	private int hp = 10;
 	private int attack;
+	private int hitchance = 7;
 
 	
 	/// CONSTRUCTOR ///
@@ -96,11 +97,21 @@ public class Player {
 		return attack;
 	}
 
-	public int getHp() {
+	public int getHP() {
 		return hp;
 	}
 
-	public void setHp(int hp) {
+	public void setHP(int hp) {
 		this.hp = hp;
+	}
+
+
+	public int getHitChance() {
+		return hitchance;
+	}
+
+
+	public void setHitChance(int hitchance) {
+		this.hitchance = hitchance;
 	}	
 }

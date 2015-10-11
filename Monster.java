@@ -8,6 +8,7 @@ public class Monster {
 	protected int health;
 	protected String name;
 	protected int attack;
+	protected int hitchance;
 	protected int lootchance; //out of 100 (1-100)
 	public Hashtable<Integer, Loot> loottable; //also based in 100, add lowest to highest 0-99
 	
@@ -23,11 +24,11 @@ public class Monster {
 		return null;
 	}
 
-	public int getHealth() {
+	public int getHP() {
 		return health;
 	}
 
-	public void setHealth(int health) {
+	public void setHP(int health) {
 		this.health = health;
 	}
 
@@ -45,5 +46,13 @@ public class Monster {
 
 	public void setAttack(int attack) {
 		this.attack = attack;
+	}
+	
+	public int getHitChance() {
+		return hitchance;
+	}
+
+	public void setHitChance(int hitchance) {
+		this.hitchance = hitchance;
 	}
 }
