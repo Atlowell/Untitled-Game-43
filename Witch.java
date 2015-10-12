@@ -1,9 +1,23 @@
+/**
+ * Witch Class (Type: Monster) for Untitled Game #43
+ * @author David Burgos, N/A
+ * @author Austin Lowell, N/A
+ * @author Wesley LaFleur, wlafleur@purdue.edu
+ * @since October 10, 2015
+ */
+
+//Update: David created Witch class and assigned values to variables name, attack, health, and loottable; also added two
+//loot items. - 10/10/15
+//Update: Austin added variable hitchance and assigned it a value. - 10/12/15
+//Update: Wesley added variable description and gave a description for Witch monster. - 10/12/15
+
 import java.util.Hashtable;
 
 public class Witch extends Monster {
 
     public Witch() {
         name = "Witch";
+        description = "A ghastly looking individual ";
         attack = 3;
         health = 12;
         hitchance = 7;

@@ -6,6 +6,7 @@ public class Monster {
 	
 	protected int health;
 	protected String name;
+	protected String description;
 	protected int attack;
 	protected int hitchance;
 	protected int lootchance; //out of 100 (1-100)
@@ -24,13 +25,9 @@ public class Monster {
 		return null;
 	}
 
-	public int getHP() {
-		return health;
-	}
+	public int getHP() { return health; }
 
-	public void setHP(int health) {
-		this.health = health;
-	}
+	public void setHP(int health) { this.health = health; }
 
 	public String getName() {
 		return name;
@@ -55,4 +52,8 @@ public class Monster {
 	public void setHitChance(int hitchance) {
 		this.hitchance = hitchance;
 	}
+
+	public String getDescription() { return description; }
+
+	public void setDescription(String description) { this.description = description; }
 }
