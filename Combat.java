@@ -43,11 +43,14 @@ public class Combat {
 	}
 	
 	//returns true if player won, false if monster won - do not call unless fight returns true or a flee fails
-	public boolean getWinner() {
+	public Boolean getWinner() {
 		if(mo.getHP() <= 0) {
 			return true;
 		}
-		return false;
+		else if(pl.getHP() <= 0) {
+			return false;
+		}
+		return null;
 	}
 	
 	public Loot retrieveLoot() {
