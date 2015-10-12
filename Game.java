@@ -9,7 +9,7 @@ public class Game {
       s.startScreen();
     }
 
-    public Game startScreen() {
+    public void startScreen() {
            Location start = new Location();
            Scanner in = new Scanner(System.in);
            String s;
@@ -29,6 +29,6 @@ public class Game {
                System.out.println("What? I did not understand your response.");
            }
        }
-        return null;
+       in.close();
     }
 }

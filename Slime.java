@@ -6,6 +6,7 @@ public class Slime extends Monster {
         name = "Slime";
         attack = 2;
         health = 8;
+        hitchance = 7;
         loottable = new Hashtable<Integer, Loot>();
         loottable.put(99, new Loot("Jelly"));
     }

@@ -1,4 +1,4 @@
-package net.spearmanstudios;
+
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class Player {
 	private ArrayList<Armor> armor;
 	private int hp = 10;
 	private int attack;
-	private int hitchance = 7;
+	private int hitchance = 8;
 
 	
 	/// CONSTRUCTOR ///

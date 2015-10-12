@@ -1,4 +1,4 @@
-package net.spearmanstudios;
+
 
 public class Armor extends Loot {
 

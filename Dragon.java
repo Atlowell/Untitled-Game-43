@@ -6,6 +6,7 @@ public class Dragon extends Monster {
         name = "Dragon";
         attack = 15;
         health = 120;
+        hitchance = 5;
         loottable = new Hashtable<Integer, Loot>();
         loottable.put(9, new Loot("Dragon Head"));
         loottable.put(15, new Loot("Dragon Egg"));

@@ -1,6 +1,5 @@
-package net.spearmanstudios;
 
-import java.util.ArrayList;
+
 import java.util.Hashtable;
 
 public class Monster {
@@ -17,9 +16,10 @@ public class Monster {
 		int val = (int)Math.random() % 100;
 		if(val < lootchance) {
 			int j = (int)Math.random() % 100;
-			for(;loottable.get(j) == null;j++) {
-				return loottable.get(j);
+			while(loottable.get(j) == null) {
+				j++;
 			}
+			return loottable.get(j);
 		}
 		return null;
 	}

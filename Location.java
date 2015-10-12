@@ -13,8 +13,113 @@ public class Location {
     //GLOBAL VARIABLES
     String s;
     Scanner in = new Scanner(System.in);
-
-    public Location square1() {
+    
+    Monster monster1 = null;
+    Monster monster2 = new Rat();
+    Monster monster3 = null;
+    Monster monster4 = null;
+    Monster monster5 = null;
+    Monster monster6 = null;
+    Monster monster7 = null;
+    Monster monster8 = null;
+    Monster monster9 = null;
+    Monster monster10 = null;
+    Monster monster11 = null;
+    Monster monster12 = null;
+    Monster monster13 = null;
+    Monster monster14 = null;
+    Monster monster15 = null;
+    Monster monster16 = null;
+    
+    		
+    private boolean checkMonster(int num) {
+    	switch(num) {
+    		case 1:
+    			if(monster1 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 2:
+    			if(monster2 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 3:
+    			if(monster3 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 4:
+    			if(monster4 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 5:
+    			if(monster5 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 6:
+    			if(monster6 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 7:
+    			if(monster7 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 8:
+    			if(monster8 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 9:
+    			if(monster9 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 10:
+    			if(monster10 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 11:
+    			if(monster11 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 12:
+    			if(monster12 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 13:
+    			if(monster13 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 14:
+    			if(monster14 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 15:
+    			if(monster15 != null) {
+    				return true;
+    			}
+    			return false;
+    		case 16:
+    			if(monster16 != null) {
+    				return true;
+    			}
+    			return false;
+    		default:
+    			return false;
+    	}
+    }
+    
+    public void square1() {
         System.out.println("*********************************");
         System.out.println("*       *       *       *       *");
         System.out.println("*   x   *       *       *       *");
@@ -33,25 +138,28 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(1)) {
+        	
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
-            System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
-            square2();
+        	System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
+        	square2();
         } else if (s.equalsIgnoreCase("s")) {
-            System.out.println("\033[31;1mYou have chosen to go south.\033[0m");
-            square5();
+        	System.out.println("\033[31;1mYou have chosen to go south.\033[0m");
+        	square5();
         } else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
-            System.out.println("\033[31;1mThanks for playing!\033[0m");
+        	System.out.println("\033[31;1mThanks for playing!\033[0m");
+        	in.close();
         }
         else {
-            System.out.println("\033[31;1mWhat?\033[0m");
-            square1();
+        	System.out.println("\033[31;1mWhat?\033[0m");
+        	square1();
         }
-        return null;
     }
 
-    public Location square2() {
+    public void square2() {
         System.out.println("*********************************");
         System.out.println("*       *       *       *       *");
         System.out.println("*       *   x   *       *       *");
@@ -70,28 +178,28 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
-            System.out.println("Which way would you like to go?");
-            s = in.nextLine();
-            if (s.equalsIgnoreCase("d")) {
-                System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
-                square3();
-            } else if (s.equalsIgnoreCase("s")) {
-                System.out.println("\033[31;1mYou have chosen to go south.\033[0m");
-                square6();
-            } else if (s.equalsIgnoreCase("a")) {
-                System.out.println("\033[31;1mYou have chosen to go west.\033[0m");
-                square1();
-            } else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
-                System.out.println("\033[31;1mThanks for playing!\033[0m");
-            }
-            else {
-                System.out.println("What?");
-                square2();
-            }
-        return null;
+        System.out.println("Which way would you like to go?");
+        s = in.nextLine();
+        if (s.equalsIgnoreCase("d")) {
+        	System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
+           	square3();
+        } else if (s.equalsIgnoreCase("s")) {
+           	System.out.println("\033[31;1mYou have chosen to go south.\033[0m");
+           	square6();
+        } else if (s.equalsIgnoreCase("a")) {
+        	System.out.println("\033[31;1mYou have chosen to go west.\033[0m");
+            square1();
+        } else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
+            System.out.println("\033[31;1mThanks for playing!\033[0m");
+           	in.close();
+        }
+        else {
+       		System.out.println("What?");
+       		square2();
+       	}
     }
 
-    public Location square3() {
+    public void square3() {
         System.out.println("*********************************");
         System.out.println("*       *       *       *       *");
         System.out.println("*       *       *   x   *       *");
@@ -113,22 +221,22 @@ public class Location {
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
-            System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
-            square4();
+        	System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
+        	square4();
         } else if (s.equalsIgnoreCase("s")) {
-            System.out.println("\033[31;1mYou have chosen to go south.\033[0m");
-            square7();
+        	System.out.println("\033[31;1mYou have chosen to go south.\033[0m");
+        	square7();
         } else if (s.equalsIgnoreCase("a")) {
-            System.out.println("\033[31;1mYou have chosen to go west.\033[0m");
-            square2();
+        	System.out.println("\033[31;1mYou have chosen to go west.\033[0m");
+        	square2();
         } else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
-            System.out.println("\033[31;1mThanks for playing!\033[0m");
+        	System.out.println("\033[31;1mThanks for playing!\033[0m");
+        	in.close();
         }
         else {
-            System.out.println("What?");
+        	System.out.println("What?");
             square3();
         }
-        return null;
     }
 
     public Location square4() {
