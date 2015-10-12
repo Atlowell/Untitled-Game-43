@@ -16,7 +16,7 @@ public class Location {
     private int room = 1;
     
     Monster monster1 = null;
-    Monster monster2 = new Rat();
+    Monster monster2 = new WildDog();
     Monster monster3 = null;
     Monster monster4 = null;
     Monster monster5 = null;
@@ -96,7 +96,7 @@ public class Location {
     
     
     
-    private void combat(Monster m, int r) {
+    private void combat(Monster m) {
     	System.out.println("You have encounted a " + m.name + "!");
     	Combat c = new Combat(p, m);
     	while(true) {
@@ -148,17 +148,17 @@ public class Location {
     		else if(s.equalsIgnoreCase("flee")) {
     			if(c.flee()) {
     				p = c.getPlayer();
-    				System.out.println("You have successfully fled back to room " + r);
-    				fleeroom(r);
+    				System.out.println("You have successfully fled back to room " + room);
+    				fleeroom(room);
     			}
-    		}
-    		else {
-    			if(c.getWinner() == false) {
-    				System.out.println("As you attempt to flee, the Monster strikes you and you fall.  Your life draws to a close.\nGame over.");
-    				in.close();
-    			}
-    			else if(c.getWinner() == null) {
-    				System.out.println("You could not escape!  The monster hits you!  Your health is now " + c.getPlayer().getHP());
+    			else {
+    				if(c.getWinner() == null) {
+    					System.out.println("You could not escape!  The monster hits you!  Your health is now " + c.getPlayer().getHP());
+    				}
+    				else if(c.getWinner() == false) {
+    					System.out.println("As you attempt to flee, the Monster strikes you and you fall.  Your life draws to a close.\nGame over.");
+    					in.close();
+    				}
     			}
     		}
     	}
@@ -191,8 +191,7 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         if(checkMonster(monster1)) {
-        	combat(monster1, 1);
-        	
+        	combat(monster1);
         }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
@@ -234,6 +233,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster2)) {
+        	combat(monster2);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -278,6 +280,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster3)) {
+        	combat(monster3);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -322,6 +327,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster4)) {
+        	combat(monster4);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("a")) {
@@ -363,6 +371,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster5)) {
+        	combat(monster5);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("w")) {
@@ -408,6 +419,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster6)) {
+        	combat(monster6);
+        }
         System.out.println("Which way would you like to go?");
         System.out.println("'a' for west.)");
         s = in.nextLine();
@@ -458,6 +472,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster7)) {
+        	combat(monster7);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("w")) {
@@ -507,6 +524,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster8)) {
+        	combat(monster8);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -554,6 +574,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster9)) {
+        	combat(monster9);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("d")) {
@@ -601,6 +624,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster10)) {
+        	combat(monster10);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -653,6 +679,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster11)) {
+        	combat(monster11);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -705,6 +734,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster12)) {
+        	combat(monster12);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -752,6 +784,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster13)) {
+        	combat(monster13);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -795,6 +830,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster14)) {
+        	combat(monster14);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -842,6 +880,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster15)) {
+        	combat(monster15);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -889,6 +930,9 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        if(checkMonster(monster16)) {
+        	combat(monster16);
+        }
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {

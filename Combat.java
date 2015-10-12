@@ -1,5 +1,6 @@
 
 
+
 public class Combat {
 	
 	private Player pl;
@@ -14,13 +15,13 @@ public class Combat {
 	
 	//returns true if there is a winner, false if the fight still goes on - getWinner should be called if true
 	public boolean fight() {
-		if(Math.random() % 10 < pl.getHitChance()) {
+		if(Math.random() * 10 < pl.getHitChance()) {
 			mo.setHP(mo.getHP()-pl.getAttack());
 		}
 		if(mo.getHP() <= 0) {
 			return true;
 		}
-		if(Math.random() % 10 < mo.getHitChance()) {
+		if(Math.random() * 10 < mo.getHitChance()) {
 			pl.setHP(pl.getHP()-mo.getAttack());
 		}
 		if(pl.getHP() <= 0) {
@@ -31,11 +32,11 @@ public class Combat {
 	
 	//returns true if flee is successful, false if flee is failed - getWinner should be called if false
 	public boolean flee() {
-		if(Math.random() % 2 < 1) {
+		if(Math.random() * 2 < 1) {
 			return true;
 		}
 		else {
-			if(Math.random() % 10 < mo.getHitChance()) {
+			if(Math.random() * 10 < mo.getHitChance()) {
 				pl.setHP(pl.getHP()-mo.getAttack());
 			}
 			return false;
