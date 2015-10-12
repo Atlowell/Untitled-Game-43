@@ -1,4 +1,5 @@
 /**
+ * Created by Wesley LaFleur, David Burgos, and Austin Lowell on 10/10/15.
  * Witch Class (Type: Monster) for Untitled Game #43
  * @author David Burgos, N/A
  * @author Austin Lowell, N/A
@@ -17,10 +18,11 @@ public class Witch extends Monster {
 
     public Witch() {
         name = "Witch";
-        description = "A ghastly looking individual ";
+        description = "A ghastly looking individual with teeth like broken glass; she seems to be staring into your\nsoul...";
         attack = 3;
         health = 12;
         hitchance = 7;
+        lootchance = 70;
         loottable = new Hashtable<Integer, Loot>();
         loottable.put(56, new Loot("Potion"));
         loottable.put(99, new Loot("Witch's Hat"));
