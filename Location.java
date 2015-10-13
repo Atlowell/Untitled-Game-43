@@ -16,8 +16,8 @@ public class Location {
     private int room = 1;
     
     Monster monster1 = null;
-    Monster monster2 = new WildDog();
-    Monster monster3 = null;
+    Monster monster2 = new Rat();
+    Monster monster3 = new WildDog();
     Monster monster4 = null;
     Monster monster5 = null;
     Monster monster6 = null;
@@ -31,6 +31,23 @@ public class Location {
     Monster monster14 = null;
     Monster monster15 = null;
     Monster monster16 = null;
+    
+    Loot loot1 = null;
+    Loot loot2 = new Weapon("David", 999);
+    Loot loot3 = new Armor("Wes", 999);
+    Loot loot4 = null;
+    Loot loot5 = null;
+    Loot loot6 = null;
+    Loot loot7 = null;
+    Loot loot8 = null;
+    Loot loot9 = null;
+    Loot loot10 = null;
+    Loot loot11 = null;
+    Loot loot12 = null;
+    Loot loot13 = null;
+    Loot loot14 = null;
+    Loot loot15 = null;
+    Loot loot16 = null;
     
     Player p;
     
@@ -110,10 +127,10 @@ public class Location {
     					p = c.getPlayer();
     					if(l != null) {
     						System.out.println("You looted a " + l.getName() + " from the " + m.getName() + "!");
-    						if(l.checkType() == "Loot") {
+    						if(l.checkType().equals("Loot")) {
     							p.addToInventory(l);
     						}
-    						else if(l.checkType() == "Armor") {
+    						else if(l.checkType().equals("Armor")) {
     							if(p.addArmor((Armor)l)) {
     								System.out.println("Armor upgrade attained! Your armor is now " + p.getAP() + "!");
     							}
@@ -121,7 +138,7 @@ public class Location {
     								System.out.println("The armor was not an upgrade.");
     							}
     						}
-    						else if(l.checkType() == "Weapon") {
+    						else if(l.checkType().equals("Weapon")) {
     							if(p.addWeapon((Weapon)l)) {
     								System.out.println("Weapon upgrade attained! Your attack is now " + p.getAttack() + "!");
     							}
@@ -164,8 +181,39 @@ public class Location {
     	}
     }
     
+    private void lootRoom(Loot l) {
+    	System.out.println("You looted a " + l.getName() + " from the room!");
+    	if(l.checkType().equals("Loot")) {
+    		p.addToInventory(l);
+    	}
+    	else if(l.checkType().equals("Armor")) {
+    		if(p.addArmor((Armor)l)) {
+    			System.out.println("Armor upgrade attained! Your armor is now " + p.getAP() + "!");
+			}
+			else {
+				System.out.println("The armor was not an upgrade.");
+    		}
+    	}
+    	else if(l.checkType().equals("Weapon")) {
+			if(p.addWeapon((Weapon)l)) {
+				System.out.println("Weapon upgrade attained! Your attack is now " + p.getAttack() + "!");
+			}
+			else {
+				System.out.println("The weapon was not an upgrade.");
+			}
+		}
+    	
+    }
+    
     private boolean checkMonster(Monster m) {
     	if(m == null) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    private boolean checkLoot(Loot l) {
+    	if(l == null) {
     		return false;
     	}
     	return true;
@@ -190,9 +238,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster1)) {
         	combat(monster1);
+        	monster1 = null;
         }
+        if(checkLoot(loot1)) {
+        	lootRoom(loot1);
+        	loot1 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -233,9 +291,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster2)) {
         	combat(monster2);
+         	monster2 = null;
         }
+        if(checkLoot(loot2)) {
+        	lootRoom(loot2);
+        	loot2 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -280,9 +348,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster3)) {
         	combat(monster3);
+         	monster3 = null;
         }
+        if(checkLoot(loot3)) {
+        	lootRoom(loot3);
+        	loot3 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        	
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -327,9 +405,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster4)) {
         	combat(monster4);
+         	monster4 = null;
         }
+        if(checkLoot(loot4)) {
+        	lootRoom(loot4);
+        	loot4 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("a")) {
@@ -371,9 +459,20 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster5)) {
         	combat(monster5);
+         	monster5 = null;
         }
+        if(checkLoot(loot5)) {
+        	lootRoom(loot5);
+        	loot5 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("w")) {
@@ -419,9 +518,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster6)) {
         	combat(monster6);
+         	monster6 = null;
         }
+        if(checkLoot(loot6)) {
+        	lootRoom(loot6);
+        	loot6 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         System.out.println("'a' for west.)");
         s = in.nextLine();
@@ -472,9 +581,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster7)) {
         	combat(monster7);
+         	monster7 = null;
         }
+        if(checkLoot(loot7)) {
+        	lootRoom(loot7);
+        	loot7 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("w")) {
@@ -524,9 +643,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster8)) {
         	combat(monster8);
+         	monster8 = null;
         }
+        if(checkLoot(loot8)) {
+        	lootRoom(loot8);
+        	loot8 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -554,7 +683,7 @@ public class Location {
         }
         return null;
     }
-
+    
     public Location square9() {
         System.out.println("*********************************");
         System.out.println("*       *       *       *       *");
@@ -574,9 +703,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster9)) {
         	combat(monster9);
+         	monster9 = null;
         }
+        if(checkLoot(loot9)) {
+        	lootRoom(loot9);
+        	loot9 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("d")) {
@@ -624,9 +763,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster10)) {
         	combat(monster10);
+         	monster10 = null;
         }
+        if(checkLoot(loot10)) {
+        	lootRoom(loot10);
+        	loot10 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -679,9 +828,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster11)) {
         	combat(monster11);
+         	monster11 = null;
         }
+        if(checkLoot(loot11)) {
+        	lootRoom(loot11);
+        	loot11 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }	
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -734,9 +893,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster12)) {
         	combat(monster12);
+         	monster12 = null;
         }
+        if(checkLoot(loot12)) {
+        	lootRoom(loot12);
+        	loot12 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -784,9 +953,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster13)) {
         	combat(monster13);
+         	monster13 = null;
         }
+        if(checkLoot(loot13)) {
+        	lootRoom(loot13);
+        	loot13 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -830,9 +1009,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster14)) {
         	combat(monster14);
+         	monster14 = null;
         }
+        if(checkLoot(loot14)) {
+        	lootRoom(loot14);
+        	loot14 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -880,9 +1069,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster15)) {
         	combat(monster15);
+         	monster15 = null;
         }
+        if(checkLoot(loot15)) {
+        	lootRoom(loot15);
+        	loot15 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {
@@ -930,9 +1129,19 @@ public class Location {
         System.out.println("*       *       *       *       *");
         System.out.println("*********************************");
         System.out.println("");
+        
         if(checkMonster(monster16)) {
         	combat(monster16);
+         	monster16 = null;
         }
+        if(checkLoot(loot16)) {
+        	lootRoom(loot16);
+        	loot16 = null;
+        }
+        else {
+        	System.out.println("You find nothing of interest in the room.");
+        }
+        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if(s.equalsIgnoreCase("w")) {

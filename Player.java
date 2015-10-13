@@ -23,16 +23,16 @@ public class Player {
 		
 		weapons = new ArrayList<Weapon>();
 		weapons.add(new Weapon("Stick", 1));
-		updateWeapon();
+		attack = 1;
 		
 		armor = new ArrayList<Armor>();
 		armor.add(new Armor("Rags", 0));
-		updateArmor();	
+		ap = 0;
 	}
 
 	
 	/// PRIVATE METHODS ///
-	private void updateArmor() {
+	/* private void updateArmor() {
 		if(armor.size() > 0) {
 			int max=0;
 			for(int i=0; i<armor.size(); i++) {
@@ -44,9 +44,9 @@ public class Player {
 			return;
 		}
 		ap = 0;
-	}
+	} */
 	
-	private void updateWeapon() {
+	/* private void updateWeapon() {
 		if(weapons.size() > 0) {
 			int max=0;
 			for(int i=0; i<weapons.size(); i++) {
@@ -58,16 +58,15 @@ public class Player {
 			return;
 		}
 		attack = 0;
-	}
+	} */
 
 	
 	/// PUBLIC METHODS ///
 	//returns true if weapon is an upgrade, false if otherwise
 	public boolean addWeapon(Weapon wep) {
 		weapons.add(wep);
-		int temp = attack;
-		updateWeapon();
-		if(attack > temp) {
+		if(wep.getAttack() > attack) {
+			attack = wep.getAttack();
 			return true;
 		}
 		return false;
@@ -76,9 +75,8 @@ public class Player {
 	//returns true if armor is an upgrade, false if otherwise
 	public boolean addArmor(Armor arm) {
 		armor.add(arm);
-		int temp = ap;
-		updateWeapon();
-		if(ap > temp) {
+		if(arm.getAP() > ap) {
+			ap = arm.getAP();
 			return true;
 		}
 		return false;
