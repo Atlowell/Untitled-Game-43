@@ -17,16 +17,30 @@ public class Combat {
 	public boolean fight() {
 		if(Math.random() * 10 < pl.getHitChance()) {
 			mo.setHP(mo.getHP()-pl.getAttack());
+			System.out.println("You swing at the " + mo.getName() + " and hit!");
+		}
+		else {
+			System.out.println("You swing at the " + mo.getName() + " but miss!");
 		}
 		if(mo.getHP() <= 0) {
 			return true;
 		}
 		if(Math.random() * 10 < mo.getHitChance()) {
-			pl.setHP(pl.getHP()-mo.getAttack());
+			if(pl.getAP() < mo.getAttack()) {
+				pl.setHP(pl.getHP()-mo.getAttack() + pl.getAP());
+				System.out.println("The " + mo.getName() + " swings at you and hits!");
+			}
+			else {
+				System.out.println("The " + mo.getName() + " swings at you and hits, but its attack bounces harmlessly off of your armor!");
+			}
+		}
+		else {
+			System.out.println("The " + mo.getName() + " swings at you but misses!");
 		}
 		if(pl.getHP() <= 0) {
 			return true;
 		}
+		System.out.println("Your health is now " + pl.getHP());
 		return false;
 	}
 	

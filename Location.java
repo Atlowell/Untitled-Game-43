@@ -14,46 +14,15 @@ public class Location {
     private String s;
     private  Scanner in;
     private int room = 1;
+ 
+    private Room[] rooms;
     
-    Monster monster1 = null;
-    Monster monster2 = new Rat();
-    Monster monster3 = new WildDog();
-    Monster monster4 = null;
-    Monster monster5 = null;
-    Monster monster6 = null;
-    Monster monster7 = null;
-    Monster monster8 = null;
-    Monster monster9 = null;
-    Monster monster10 = null;
-    Monster monster11 = null;
-    Monster monster12 = null;
-    Monster monster13 = null;
-    Monster monster14 = null;
-    Monster monster15 = null;
-    Monster monster16 = null;
-    
-    Loot loot1 = null;
-    Loot loot2 = new Weapon("David", 999);
-    Loot loot3 = new Armor("Wes", 999);
-    Loot loot4 = null;
-    Loot loot5 = null;
-    Loot loot6 = null;
-    Loot loot7 = null;
-    Loot loot8 = null;
-    Loot loot9 = null;
-    Loot loot10 = null;
-    Loot loot11 = null;
-    Loot loot12 = null;
-    Loot loot13 = null;
-    Loot loot14 = null;
-    Loot loot15 = null;
-    Loot loot16 = null;
-    
-    Player p;
+    private Player p;
     
     public Location(Player pl, Scanner sc) {
     	p = pl;
     	in = sc;
+    	rooms = RoomInit.initRooms();
     }
     		
     private void fleeroom(int num) {
@@ -158,9 +127,6 @@ public class Location {
     					System.exit(0);
     				}
     			}
-    			else {
-    				System.out.println("You and the " + m.getName() + " swing at eachother.  Your health is now " + c.getPlayer().getHP() + ".");
-    			}
     		}
     		else if(s.equalsIgnoreCase("flee")) {
     			if(c.flee()) {
@@ -239,18 +205,17 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster1)) {
-        	combat(monster1);
-        	monster1 = null;
+        if(checkMonster(rooms[0].getMonster())) {
+        	combat(rooms[0].getMonster());
+       		rooms[0].addMonster(null);
+       	}
+       	if(checkLoot(rooms[0].getLoot())) {
+       		lootRoom(rooms[0].getLoot());
+       		rooms[0].addLoot(null);
+       	}
+       	else {
+       		System.out.println("You find nothing of interest in the room.");
         }
-        if(checkLoot(loot1)) {
-        	lootRoom(loot1);
-        	loot1 = null;
-        }
-        else {
-        	System.out.println("You find nothing of interest in the room.");
-        }
-        
         System.out.println("Which way would you like to go?");
         s = in.nextLine();
         if (s.equalsIgnoreCase("d")) {
@@ -292,13 +257,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster2)) {
-        	combat(monster2);
-         	monster2 = null;
+        if(checkMonster(rooms[1].getMonster())) {
+        	combat(rooms[1].getMonster());
+        	rooms[1].addMonster(null);
         }
-        if(checkLoot(loot2)) {
-        	lootRoom(loot2);
-        	loot2 = null;
+        if(checkLoot(rooms[1].getLoot())) {
+        	lootRoom(rooms[1].getLoot());
+        	rooms[1].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -349,13 +314,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster3)) {
-        	combat(monster3);
-         	monster3 = null;
+        if(checkMonster(rooms[2].getMonster())) {
+        	combat(rooms[2].getMonster());
+        	rooms[2].addMonster(null);
         }
-        if(checkLoot(loot3)) {
-        	lootRoom(loot3);
-        	loot3 = null;
+        if(checkLoot(rooms[2].getLoot())) {
+        	lootRoom(rooms[2].getLoot());
+        	rooms[2].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -406,13 +371,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster4)) {
-        	combat(monster4);
-         	monster4 = null;
+        if(checkMonster(rooms[3].getMonster())) {
+        	combat(rooms[3].getMonster());
+        	rooms[3].addMonster(null);
         }
-        if(checkLoot(loot4)) {
-        	lootRoom(loot4);
-        	loot4 = null;
+        if(checkLoot(rooms[3].getLoot())) {
+        	lootRoom(rooms[3].getLoot());
+        	rooms[3].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -460,13 +425,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster5)) {
-        	combat(monster5);
-         	monster5 = null;
+        if(checkMonster(rooms[4].getMonster())) {
+        	combat(rooms[4].getMonster());
+        	rooms[4].addMonster(null);
         }
-        if(checkLoot(loot5)) {
-        	lootRoom(loot5);
-        	loot5 = null;
+        if(checkLoot(rooms[4].getLoot())) {
+        	lootRoom(rooms[4].getLoot());
+        	rooms[4].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -519,20 +484,19 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster6)) {
-        	combat(monster6);
-         	monster6 = null;
+        if(checkMonster(rooms[5].getMonster())) {
+        	combat(rooms[5].getMonster());
+        	rooms[5].addMonster(null);
         }
-        if(checkLoot(loot6)) {
-        	lootRoom(loot6);
-        	loot6 = null;
+        if(checkLoot(rooms[5].getLoot())) {
+        	lootRoom(rooms[5].getLoot());
+        	rooms[5].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
         }
         
         System.out.println("Which way would you like to go?");
-        System.out.println("'a' for west.)");
         s = in.nextLine();
         if (s.equalsIgnoreCase("w")) {
             System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -582,13 +546,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster7)) {
-        	combat(monster7);
-         	monster7 = null;
+        if(checkMonster(rooms[6].getMonster())) {
+        	combat(rooms[6].getMonster());
+        	rooms[6].addMonster(null);
         }
-        if(checkLoot(loot7)) {
-        	lootRoom(loot7);
-        	loot7 = null;
+        if(checkLoot(rooms[6].getLoot())) {
+        	lootRoom(rooms[6].getLoot());
+        	rooms[6].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -644,13 +608,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster8)) {
-        	combat(monster8);
-         	monster8 = null;
+        if(checkMonster(rooms[7].getMonster())) {
+        	combat(rooms[7].getMonster());
+        	rooms[7].addMonster(null);
         }
-        if(checkLoot(loot8)) {
-        	lootRoom(loot8);
-        	loot8 = null;
+        if(checkLoot(rooms[7].getLoot())) {
+        	lootRoom(rooms[7].getLoot());
+        	rooms[7].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -704,13 +668,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster9)) {
-        	combat(monster9);
-         	monster9 = null;
+        if(checkMonster(rooms[8].getMonster())) {
+        	combat(rooms[8].getMonster());
+        	rooms[8].addMonster(null);
         }
-        if(checkLoot(loot9)) {
-        	lootRoom(loot9);
-        	loot9 = null;
+        if(checkLoot(rooms[8].getLoot())) {
+        	lootRoom(rooms[8].getLoot());
+        	rooms[8].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -764,13 +728,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster10)) {
-        	combat(monster10);
-         	monster10 = null;
+        if(checkMonster(rooms[9].getMonster())) {
+        	combat(rooms[9].getMonster());
+        	rooms[9].addMonster(null);
         }
-        if(checkLoot(loot10)) {
-        	lootRoom(loot10);
-        	loot10 = null;
+        if(checkLoot(rooms[9].getLoot())) {
+        	lootRoom(rooms[9].getLoot());
+        	rooms[9].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -829,13 +793,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster11)) {
-        	combat(monster11);
-         	monster11 = null;
+        if(checkMonster(rooms[10].getMonster())) {
+        	combat(rooms[10].getMonster());
+        	rooms[10].addMonster(null);
         }
-        if(checkLoot(loot11)) {
-        	lootRoom(loot11);
-        	loot11 = null;
+        if(checkLoot(rooms[10].getLoot())) {
+        	lootRoom(rooms[10].getLoot());
+        	rooms[10].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -894,13 +858,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster12)) {
-        	combat(monster12);
-         	monster12 = null;
+        if(checkMonster(rooms[11].getMonster())) {
+        	combat(rooms[11].getMonster());
+        	rooms[11].addMonster(null);
         }
-        if(checkLoot(loot12)) {
-        	lootRoom(loot12);
-        	loot12 = null;
+        if(checkLoot(rooms[11].getLoot())) {
+        	lootRoom(rooms[11].getLoot());
+        	rooms[11].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -954,13 +918,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster13)) {
-        	combat(monster13);
-         	monster13 = null;
+        if(checkMonster(rooms[12].getMonster())) {
+        	combat(rooms[12].getMonster());
+        	rooms[12].addMonster(null);
         }
-        if(checkLoot(loot13)) {
-        	lootRoom(loot13);
-        	loot13 = null;
+        if(checkLoot(rooms[12].getLoot())) {
+        	lootRoom(rooms[12].getLoot());
+        	rooms[12].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -1010,13 +974,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster14)) {
-        	combat(monster14);
-         	monster14 = null;
+        if(checkMonster(rooms[13].getMonster())) {
+        	combat(rooms[13].getMonster());
+        	rooms[13].addMonster(null);
         }
-        if(checkLoot(loot14)) {
-        	lootRoom(loot14);
-        	loot14 = null;
+        if(checkLoot(rooms[13].getLoot())) {
+        	lootRoom(rooms[13].getLoot());
+        	rooms[13].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -1070,13 +1034,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster15)) {
-        	combat(monster15);
-         	monster15 = null;
+        if(checkMonster(rooms[14].getMonster())) {
+        	combat(rooms[14].getMonster());
+        	rooms[14].addMonster(null);
         }
-        if(checkLoot(loot15)) {
-        	lootRoom(loot15);
-        	loot15 = null;
+        if(checkLoot(rooms[14].getLoot())) {
+        	lootRoom(rooms[14].getLoot());
+        	rooms[14].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");
@@ -1130,13 +1094,13 @@ public class Location {
         System.out.println("*********************************");
         System.out.println("");
         
-        if(checkMonster(monster16)) {
-        	combat(monster16);
-         	monster16 = null;
+        if(checkMonster(rooms[15].getMonster())) {
+        	combat(rooms[15].getMonster());
+        	rooms[15].addMonster(null);
         }
-        if(checkLoot(loot16)) {
-        	lootRoom(loot16);
-        	loot16 = null;
+        if(checkLoot(rooms[15].getLoot())) {
+        	lootRoom(rooms[15].getLoot());
+        	rooms[15].addLoot(null);
         }
         else {
         	System.out.println("You find nothing of interest in the room.");

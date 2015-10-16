@@ -14,6 +14,9 @@ public class Monster {
 	
 	
 	public Loot getLoot() { //returns loot if you get it, or null if you don't
+		if(loottable.isEmpty()) {
+			return null;
+		}
 		int val = (int)Math.random() * 100;
 		if(val < lootchance) {
 			int j = (int)Math.random() * 100;
