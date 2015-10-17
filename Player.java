@@ -111,5 +111,43 @@ public class Player {
 
 	public void setHitChance(int hitchance) {
 		this.hitchance = hitchance;
-	}	
+	}
+	
+	
+	public void getInventory() {
+		System.out.println("");
+		if(inventory.size() > 0) {
+			String inv = "Inventory: ";
+			for(int i = 0; i < inventory.size() - 1; i++) {
+				inv = inv + inventory.get(i).getName() + ", ";
+			}
+			inv = inv + inventory.get(inventory.size() - 1).getName();
+			System.out.println(inv);
+		}
+		else {
+			System.out.println("Your inventory is empty.");
+		}
+		if(weapons.size() > 0) {
+			String wep = "Weapon Stash(Attack): ";
+			for(int i = 0; i < weapons.size() - 1; i++) {
+				wep = wep + weapons.get(i).getName() + "(" + weapons.get(i).getAttack() + "), ";
+			}
+			wep = wep + weapons.get(weapons.size() - 1).getName() + "(" + weapons.get(weapons.size() - 1).getAttack() + ")";
+			System.out.println(wep);
+		}
+		else {
+			System.out.println("Your weapon stash is empty.");
+		}
+		if(armor.size() > 0) {
+			String arm = "Armor Stash(Armor): ";
+			for(int i = 0; i < armor.size() - 1; i++) {
+				arm = arm + armor.get(i).getName() + "(" + armor.get(i).getAP() + "), ";
+			}
+			arm = arm + armor.get(armor.size() - 1).getName() + "(" + armor.get(armor.size() - 1).getAP() + ")";
+			System.out.println(arm);
+		}
+		else {
+			System.out.println("Your armor stash is empty.");
+		}
+	}
 }

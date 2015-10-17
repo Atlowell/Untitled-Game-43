@@ -33,6 +33,7 @@ public class Room {
 	}
 	
 	public void printMap() {
+		System.out.println("");
 		for(int i = 0; i<17;i++) {
 			System.out.println(map[i]);
 		}

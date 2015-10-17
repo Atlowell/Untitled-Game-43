@@ -30,7 +30,7 @@ public class RoomInit {
 	
 	private static Room initRoom2() {
 		Room room2 = new Room(2);
-		//room2.addMonster(new Rat());
+		room2.addMonster(new Rat());
 		//room2.addLoot(new Weapon("David", 999));
 		room2.map[2] = "*       *   x   *       *       *";
 		return room2;
@@ -38,7 +38,7 @@ public class RoomInit {
 	
 	private static Room initRoom3() {
 		Room room3 = new Room(3);
-		//room3.addMonster(new WildDog());
+		room3.addMonster(new WildDog());
 		//room3.addLoot(new Armor("Wes", 999));
 		room3.map[2] = "*       *       *   x   *       *";
 		return room3;

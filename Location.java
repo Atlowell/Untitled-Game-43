@@ -117,7 +117,7 @@ public class Location {
     						}
     					}
     					else {
-    						System.out.println("You found nothing of interest.");
+    						System.out.println("You found nothing of interest on the " + m.getName() + ".");
     					}
     					return;
     				}
@@ -131,15 +131,15 @@ public class Location {
     		else if(s.equalsIgnoreCase("flee")) {
     			if(c.flee()) {
     				p = c.getPlayer();
-    				System.out.println("You have successfully fled back to room " + room);
+    				System.out.println("You have successfully fled back to room " + room + ".");
     				fleeroom(room);
     			}
     			else {
     				if(c.getWinner() == null) {
-    					System.out.println("You could not escape!  The monster hits you!  Your health is now " + c.getPlayer().getHP());
+    					System.out.println("You could not escape!  The " + m.getName() + " hits you!  Your health is now " + c.getPlayer().getHP());
     				}
     				else if(c.getWinner() == false) {
-    					System.out.println("As you attempt to flee, the Monster strikes you and you fall.  Your life draws to a close.\nGame over.");
+    					System.out.println("As you attempt to flee, the " + m.getName() + " strikes you and you fall.  Your life draws to a close.\nGame over.");
     					in.close();
     				}
     			}
@@ -148,7 +148,7 @@ public class Location {
     }
     
     private void lootRoom(Loot l) {
-    	System.out.println("You looted a " + l.getName() + " from the room!");
+    	System.out.println("You found a " + l.getName() + " in the room!");
     	if(l.checkType().equals("Loot")) {
     		p.addToInventory(l);
     	}
@@ -185,6 +185,18 @@ public class Location {
     	return true;
     }
     
+    private void printHelp() {
+    	System.out.println("Here are the controls:");
+        System.out.println("w - North");
+        System.out.println("a - West");
+        System.out.println("s - South");
+        System.out.println("d - East");
+        System.out.println("quit OR exit - Exits the game");
+        System.out.println("map - Shows the map");
+        System.out.println("inventory - Shows your inventory");
+        System.out.println("help - Shows the help screen");
+    }
+    
     public void square1() {
         rooms[0].printMap();
         System.out.println("");
@@ -198,9 +210,10 @@ public class Location {
        		rooms[0].addLoot(null);
        	}
        	else {
-       		System.out.println("You find nothing of interest in the room.");
+       		System.out.println("You search the room, but find nothing of interest.");
         }
        	while(true) {
+       		System.out.println("");
        		System.out.println("Which way would you like to go?");
        		s = in.nextLine();
        		if (s.equalsIgnoreCase("d")) {
@@ -217,6 +230,15 @@ public class Location {
        			System.out.println("\033[31;1mThanks for playing!\033[0m");
        			in.close();
        			System.exit(0);
+       		}
+       		else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[0].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
        		}
        		else {
        			System.out.println("\033[31;1mI don't understand your input\033[0m");
@@ -238,10 +260,11 @@ public class Location {
         	rooms[1].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("d")) {
@@ -264,6 +287,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[1].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -284,10 +316,11 @@ public class Location {
         	rooms[2].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("d")) {
@@ -310,6 +343,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[2].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -330,10 +372,11 @@ public class Location {
         	rooms[3].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
 
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("a")) {
@@ -351,6 +394,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[3].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -371,10 +423,11 @@ public class Location {
         	rooms[4].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("w")) {
@@ -397,6 +450,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[4].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -417,10 +479,11 @@ public class Location {
         	rooms[5].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("w")) {
@@ -448,6 +511,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[5].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -468,10 +540,11 @@ public class Location {
         	rooms[6].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("w")) {
@@ -499,6 +572,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[6].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -519,10 +601,11 @@ public class Location {
         	rooms[7].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if(s.equalsIgnoreCase("w")) {
@@ -547,6 +630,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[7].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -567,10 +659,11 @@ public class Location {
         	rooms[8].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if(s.equalsIgnoreCase("d")) {
@@ -595,6 +688,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[8].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -615,10 +717,11 @@ public class Location {
         	rooms[9].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("d")) {
@@ -649,6 +752,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[9].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -669,10 +781,11 @@ public class Location {
         	rooms[10].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }	
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if (s.equalsIgnoreCase("d")) {
@@ -703,6 +816,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[10].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -723,10 +845,11 @@ public class Location {
         	rooms[11].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if(s.equalsIgnoreCase("w")) {
@@ -751,6 +874,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[11].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -771,10 +903,11 @@ public class Location {
         	rooms[12].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if(s.equalsIgnoreCase("w")) {
@@ -794,6 +927,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[12].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -814,10 +956,11 @@ public class Location {
         	rooms[13].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if(s.equalsIgnoreCase("w")) {
@@ -842,6 +985,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[13].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -862,10 +1014,11 @@ public class Location {
         	rooms[14].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if(s.equalsIgnoreCase("w")) {
@@ -890,6 +1043,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[14].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");
@@ -910,10 +1072,11 @@ public class Location {
         	rooms[15].addLoot(null);
         }
         else {
-        	System.out.println("You find nothing of interest in the room.");
+        	System.out.println("You search the room, but find nothing of interest.");
         }
         
         while(true) {
+        	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	s = in.nextLine();
         	if(s.equalsIgnoreCase("w")) {
@@ -932,6 +1095,15 @@ public class Location {
         		in.close();
         		System.exit(0);
         	}
+        	else if (s.equalsIgnoreCase("inventory")) {
+       			p.getInventory();
+       		}
+       		else if (s.equalsIgnoreCase("map")) {
+       			rooms[15].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("help")) {
+       			printHelp();
+       		}
         	else {
         		System.out.println("\033[31;1mI don't understand your input\033[0m");
         		System.out.println("");

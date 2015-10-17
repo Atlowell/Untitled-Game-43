@@ -26,6 +26,10 @@ public class Game {
            System.out.println("s - South");
            System.out.println("d - East");
            System.out.println("quit OR exit - Exits the game");
+           System.out.println("map - Shows the map");
+           System.out.println("inventory - Shows your inventory");
+           System.out.println("help - Shows the help screen");
+           System.out.println("");
            System.out.println("Ready? Type 'start' without the single quotes to enter the world of [empty]!");
         while (true) {
            s = in.nextLine();
