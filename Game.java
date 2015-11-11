@@ -81,7 +81,7 @@ public class Game implements KeyListener {
         	   }
            };
            thread1 = new Thread(r);
-           thread1.start();
+           //thread1.start();
            thread1.run();
            
            //textUpdate();
@@ -90,7 +90,9 @@ public class Game implements KeyListener {
            
            //s = in.nextLine();
            //p = new Player("Test");
+           System.out.println("");
            System.out.println("Welcome " + p.getName() + "!\n");
+           System.out.println("");
            System.out.println("Below are the controls for the game:");
            System.out.println("w - North");
            System.out.println("a - West");
@@ -99,6 +101,8 @@ public class Game implements KeyListener {
            System.out.println("quit OR exit - Exits the game");
            System.out.println("map - Shows the map");
            System.out.println("inventory - Shows your inventory");
+           System.out.println("stats - Shows your current stats");
+           System.out.println("use [itemname] - Uses itemname from your inventory");
            System.out.println("help - Shows the help screen");
            System.out.println("");
            System.out.println("Ready? Type 'start' without the single quotes to enter the world of [empty]!");
@@ -107,7 +111,7 @@ public class Game implements KeyListener {
            
            while(true) {
         	   thread1 = new Thread(r);
-               thread1.start();
+               //thread1.start();
                thread1.run();
         	   if(readstring.equalsIgnoreCase("start")) {
         		   typearea.removeKeyListener(this);

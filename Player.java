@@ -10,6 +10,7 @@ public class Player {
 	private ArrayList<Loot> inventory;
 	private ArrayList<Weapon> weapons;
 	private ArrayList<Armor> armor;
+	private ArrayList<Consumable> cons;
 	private int hp = 10;
 	private int attack;
 	private int hitchance = 8;
@@ -28,6 +29,8 @@ public class Player {
 		armor = new ArrayList<Armor>();
 		armor.add(new Armor("Rags", 0));
 		ap = 0;
+		
+		cons = new ArrayList<Consumable>();
 	}
 
 	
@@ -82,6 +85,10 @@ public class Player {
 		return false;
 	}
 	
+	public void addConsumable(Consumable con) {
+		cons.add(con);
+	}
+	
 	public void addToInventory(Loot l) {
 		inventory.add(l);
 	}
@@ -118,6 +125,61 @@ public class Player {
 	}
 	
 	
+	public Consumable findCons(String s) {
+		for(int i = 0; i < cons.size(); i++) {
+			//System.out.println("getName: " + cons.get(i).getName() + " s Name: " + s);
+			if(cons.get(i).getName().equalsIgnoreCase(s)) {
+				return cons.remove(i);
+			}
+		}
+		return null;
+	}
+	
+	public Weapon findWeapon(String s) {
+		for(int i = 0; i < weapons.size(); i++) {
+			if(weapons.get(i).getName().equalsIgnoreCase(s)) {
+				return weapons.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public Armor findArmor(String s) {
+		for(int i = 0; i < armor.size(); i++) {
+			if(armor.get(i).getName().equalsIgnoreCase(s)) {
+				return armor.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public void applyEffect(Effect ef) {
+		Thread thread2;
+		Runnable time = new Runnable() {
+			@Override
+			public void run() {
+				//synchronized(thread2) {
+					hp+= ef.getHMod();
+					ap+= ef.getAPMod();
+					attack+= ef.getAttackMod();
+					System.out.println("You have consumed a consumable.");
+					try {
+					Thread.sleep(1000 * ef.getDuration());
+					}
+					catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+					hp-= ef.getHMod();
+					ap-= ef.getAPMod();
+					attack-= ef.getAttackMod();
+					System.out.println("The consumable has worn off");
+				//}
+			}
+		};
+		thread2 = new Thread(time);
+		thread2.start();
+	}
+	
 	public void getInventory() {
 		System.out.println("");
 		if(inventory.size() > 0) {
@@ -152,6 +214,17 @@ public class Player {
 		}
 		else {
 			System.out.println("Your armor stash is empty.");
+		}
+		if(cons.size() > 0) {
+			String con = "Consumables Bag: ";
+			for(int i = 0; i < cons.size() - 1; i++) {
+				con = con + cons.get(i).getName() + ", ";
+			}
+			con = con + cons.get(cons.size() - 1).getName();
+			System.out.println(con);
+		}
+		else {
+			System.out.println("Your Consumables Bag is empty.");
 		}
 	}
 }

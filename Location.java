@@ -115,7 +115,7 @@ public class Location extends JFrame implements KeyListener {
     	while(true) {
     		System.out.println("Fight or flee?");
     		thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
     		thread1.run();
     		if(s.equalsIgnoreCase("fight")) {
     			if(c.fight()) {
@@ -143,6 +143,9 @@ public class Location extends JFrame implements KeyListener {
     							else {
     								System.out.println("The weapon was not an upgrade.");
     							}
+    						}
+    						else if(l.checkType().equals("Consumable")){
+    							p.addConsumable((Consumable)l);
     						}
     					}
     					else {
@@ -197,6 +200,9 @@ public class Location extends JFrame implements KeyListener {
 				System.out.println("The weapon was not an upgrade.");
 			}
 		}
+    	else if(l.checkType().equals("Consumable")) {
+    		p.addConsumable((Consumable)l);
+    	}
     	
     }
     
@@ -223,7 +229,19 @@ public class Location extends JFrame implements KeyListener {
         System.out.println("quit OR exit - Exits the game");
         System.out.println("map - Shows the map");
         System.out.println("inventory - Shows your inventory");
+        System.out.println("stats - Shows your current stats");
+        System.out.println("use [itemname] - Uses itemname from your inventory");
         System.out.println("help - Shows the help screen");
+    }
+    
+    private void useConsumable(String c) {
+    	Consumable co = p.findCons(c);
+    	if(co == null) {
+    		System.out.println("No such consumable found.");
+    	}
+    	else {
+    		p.applyEffect(co.getEffect());
+    	}
     }
     
     public void square1() {
@@ -245,7 +263,7 @@ public class Location extends JFrame implements KeyListener {
        		System.out.println("");
        		System.out.println("Which way would you like to go?");
        		thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
        		thread1.run(); //TODO: HERE
        		if (s.equalsIgnoreCase("d")) {
        			System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
@@ -267,6 +285,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[0].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -298,7 +330,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
@@ -325,6 +357,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[1].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -356,7 +402,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
@@ -384,6 +430,20 @@ public class Location extends JFrame implements KeyListener {
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[2].printMap();
        		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
+       		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
        		}
@@ -409,12 +469,12 @@ public class Location extends JFrame implements KeyListener {
         else {
         	System.out.println("You search the room, but find nothing of interest.");
         }
-
+        
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("a")) {
         		System.out.println("\033[31;1mYou have chosen to go west.\033[0m");
@@ -436,6 +496,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[3].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -467,7 +541,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -494,6 +568,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[4].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -525,7 +613,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -558,6 +646,20 @@ public class Location extends JFrame implements KeyListener {
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[5].printMap();
        		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
+       		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
        		}
@@ -588,7 +690,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -621,6 +723,20 @@ public class Location extends JFrame implements KeyListener {
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[6].printMap();
        		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
+       		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
        		}
@@ -651,7 +767,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -680,6 +796,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[7].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -711,7 +841,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if(s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
@@ -740,6 +870,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[8].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -771,7 +915,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
@@ -807,6 +951,20 @@ public class Location extends JFrame implements KeyListener {
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[9].printMap();
        		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
+       		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
        		}
@@ -837,7 +995,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
@@ -873,6 +1031,20 @@ public class Location extends JFrame implements KeyListener {
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[10].printMap();
        		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
+       		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
        		}
@@ -903,7 +1075,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -932,6 +1104,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[11].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -963,7 +1149,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -987,6 +1173,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[12].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -1018,7 +1218,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -1047,6 +1247,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[13].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -1078,7 +1292,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -1107,6 +1321,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[14].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();
@@ -1138,7 +1366,7 @@ public class Location extends JFrame implements KeyListener {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
         	thread1 = new Thread(r);
-            thread1.start();
+            //thread1.start();
         	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
@@ -1161,6 +1389,20 @@ public class Location extends JFrame implements KeyListener {
        		}
        		else if (s.equalsIgnoreCase("map")) {
        			rooms[15].printMap();
+       		}
+       		else if (s.equalsIgnoreCase("stats")) {
+       			System.out.println("Health: " + p.getHP());
+       			System.out.println("Armor Points: " + p.getAP());
+       			System.out.println("Attack Points: " + p.getAttack());
+       		}
+       		else if (s.split(" ")[0].equalsIgnoreCase("use")) {
+       			String[] arr = s.split(" ");
+       			String s2 = "";
+       			for(int i = 1; i < arr.length - 1; i++) {
+       				s2 = s2 + arr[i] + " ";
+       			}
+       			s2 = s2 + arr[arr.length - 1];
+       			useConsumable(s2);
        		}
        		else if (s.equalsIgnoreCase("help")) {
        			printHelp();

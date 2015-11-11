@@ -47,6 +47,7 @@ public class RoomInit {
 	private static Room initRoom4() {
 		Room room4 = new Room(4);
 		room4.map[2] = "*       *       *       *   x   *";
+		room4.addLoot(new Consumable("Mundane Potion", new Effect(1, 1, 1, 5)));
 		return room4;
 	}
 	
