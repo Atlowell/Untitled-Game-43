@@ -1,4 +1,10 @@
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  * [Untitled Game]
@@ -8,21 +14,42 @@ import java.util.Scanner;
  * @author David Burgos, N/A
  * @version October 10, 2015
  */
-public class Location {
+public class Location extends JFrame implements KeyListener {
 
     //GLOBAL VARIABLES
     private String s;
-    private  Scanner in;
+    private  Thread thread1;
+    private JTextArea typearea;
+    private Runnable r;
     private int room = 1;
  
     private Room[] rooms;
     
     private Player p;
     
-    public Location(Player pl, Scanner sc) {
+    public Location(Player pl, Thread th, JTextArea typea) {
     	p = pl;
-    	in = sc;
+    	thread1 = th;
+    	typearea = typea;
+    	r = new Runnable() {
+     	   @Override
+     	   public void run() {
+     		   synchronized(thread1) {
+     			   try 
+                    {
+                        thread1.wait();
+                        //System.out.println("TEEEEEEEEEEST");
+                    } 
+                    catch (InterruptedException e) 
+                    {
+                 	   e.printStackTrace();
+                    }
+     		   }
+     	   }
+        };
     	rooms = RoomInit.initRooms();
+    	//typearea.addKeyListener(this);
+    	
     }
     		
     private void fleeroom(int num) {
@@ -87,7 +114,9 @@ public class Location {
     	Combat c = new Combat(p, m);
     	while(true) {
     		System.out.println("Fight or flee?");
-    		s = in.nextLine();
+    		thread1 = new Thread(r);
+            thread1.start();
+    		thread1.run();
     		if(s.equalsIgnoreCase("fight")) {
     			if(c.fight()) {
     				if(c.getWinner()) {
@@ -123,7 +152,7 @@ public class Location {
     				}
     				else {
     					System.out.println("You fought in vain but in the end, the monsters of this strange realm were too much for you.\nYou have died.  Game over.");
-    					in.close();
+    					//in.close();
     					System.exit(0);
     				}
     			}
@@ -140,7 +169,7 @@ public class Location {
     				}
     				else if(c.getWinner() == false) {
     					System.out.println("As you attempt to flee, the " + m.getName() + " strikes you and you fall.  Your life draws to a close.\nGame over.");
-    					in.close();
+    					//in.close();
     				}
     			}
     		}
@@ -215,7 +244,9 @@ public class Location {
        	while(true) {
        		System.out.println("");
        		System.out.println("Which way would you like to go?");
-       		s = in.nextLine();
+       		thread1 = new Thread(r);
+            thread1.start();
+       		thread1.run(); //TODO: HERE
        		if (s.equalsIgnoreCase("d")) {
        			System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
        			room = 1;
@@ -228,7 +259,7 @@ public class Location {
        			break;
        		} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
        			System.out.println("\033[31;1mThanks for playing!\033[0m");
-       			in.close();
+       			//in.close();
        			System.exit(0);
        		}
        		else if (s.equalsIgnoreCase("inventory")) {
@@ -266,7 +297,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
         		room = 2;
@@ -284,7 +317,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -322,7 +355,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
         		room = 3;
@@ -340,7 +375,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -378,7 +413,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("a")) {
         		System.out.println("\033[31;1mYou have chosen to go west.\033[0m");
         		room = 4;
@@ -391,7 +428,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -429,7 +466,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 5;
@@ -447,7 +486,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -485,7 +524,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 6;
@@ -508,7 +549,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -546,7 +587,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 7;
@@ -569,7 +612,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -607,7 +650,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 8;
@@ -627,7 +672,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -665,7 +710,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if(s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
         		room = 9;
@@ -685,7 +732,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -723,7 +770,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
         		room = 10;
@@ -749,7 +798,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -787,7 +836,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if (s.equalsIgnoreCase("d")) {
         		System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
         		room = 11;
@@ -813,7 +864,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -851,7 +902,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 12;
@@ -871,7 +924,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -909,7 +962,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 13;
@@ -924,7 +979,7 @@ public class Location {
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
         		room = 13;
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -962,7 +1017,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 14;
@@ -982,7 +1039,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -1020,7 +1077,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 15;
@@ -1040,7 +1099,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -1078,7 +1137,9 @@ public class Location {
         while(true) {
         	System.out.println("");
         	System.out.println("Which way would you like to go?");
-        	s = in.nextLine();
+        	thread1 = new Thread(r);
+            thread1.start();
+        	thread1.run();
         	if(s.equalsIgnoreCase("w")) {
         		System.out.println("\033[31;1mYou have chosen to go north.\033[0m");
         		room = 16;
@@ -1092,7 +1153,7 @@ public class Location {
         		break;
         	} else if (s.equalsIgnoreCase("exit") || s.equalsIgnoreCase("quit")) {
         		System.out.println("\033[31;1mThanks for playing!\033[0m");
-        		in.close();
+        		//in.close();
         		System.exit(0);
         	}
         	else if (s.equalsIgnoreCase("inventory")) {
@@ -1110,4 +1171,36 @@ public class Location {
         	}
         }
     }
+    
+    @Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		//System.out.println("k");
+		if(e.getKeyChar() == '\n') {
+			//System.out.println("Pressed");
+			s = typearea.getText();
+			if(s.length() > 1) {
+				s = s.substring(0, s.length()-1);
+				synchronized(thread1)
+	            {
+					thread1.notify();
+	            } 
+			}
+			else {
+				System.out.println("Invalid input, try again");
+			}
+			
+			typearea.setText("");
+		}
+	}
+    
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Player {
 	
 	/// GLOBAL VARIABLES ///
-	public String name;
+	private String name;
 	private int ap;
 	private ArrayList<Loot> inventory;
 	private ArrayList<Weapon> weapons;
@@ -111,6 +111,10 @@ public class Player {
 
 	public void setHitChance(int hitchance) {
 		this.hitchance = hitchance;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	
