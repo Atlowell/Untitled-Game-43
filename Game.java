@@ -29,6 +29,7 @@ public class Game implements KeyListener {
 	private Thread thread1;
 	
 	private String readstring;
+	 
 	
     public static void main(String[] args) {
       Game s = new Game();
@@ -58,10 +59,12 @@ public class Game implements KeyListener {
     	   cos = new CustomOutputStream(textarea);
     	   printstream = new PrintStream(cos);
     	   System.setOut(printstream);
-    	   //System.setErr(printstream);
     	   
-           //Scanner in = new Scanner(System.in);
-           //String s;
+    	   manage();
+    }
+    
+    public void manage() {
+    	
            System.out.println("Welcome to [Untitled Game]!  Please enter name.");
            
            Runnable r = new Runnable() {
@@ -71,7 +74,6 @@ public class Game implements KeyListener {
         			   try 
                        {
                            thread1.wait();
-                           //System.out.println("TEEEEEEEEEEST");
                        } 
                        catch (InterruptedException e) 
                        {
@@ -81,15 +83,11 @@ public class Game implements KeyListener {
         	   }
            };
            thread1 = new Thread(r);
-           //thread1.start();
            thread1.run();
            
-           //textUpdate();
 
            p = new Player(readstring);
            
-           //s = in.nextLine();
-           //p = new Player("Test");
            System.out.println("");
            System.out.println("Welcome " + p.getName() + "!\n");
            System.out.println("");
@@ -107,39 +105,21 @@ public class Game implements KeyListener {
            System.out.println("");
            System.out.println("Ready? Type 'start' without the single quotes to enter the world of [empty]!");
            
-           Location start = new Location(p, thread1, typearea);
            
            while(true) {
         	   thread1 = new Thread(r);
-               //thread1.start();
                thread1.run();
         	   if(readstring.equalsIgnoreCase("start")) {
+        		   RoomInit.initRooms();
         		   typearea.removeKeyListener(this);
-        		   typearea.addKeyListener(start);
-        		   start.square1();
+        		   typearea.addKeyListener(RoomInit.rooms[0]);
+        		   RoomInit.rooms[0].operate(p, typearea, 0);
         		   break;
         	   }
         	   else {
         		   System.out.println("I did not understand your response.");
         	   }
            }
-           
-        /*while (true) {
-           s = in.nextLine();
-           if (s.equalsIgnoreCase("start")) {
-               start.square1();
-               break;
-           } else {
-               System.out.println("What? I did not understand your response.");
-           }
-       }
-       //in.close(); */
-    }
-
-    private void textUpdate() {
-    	textarea = cos.getText();
-    	textframe.getContentPane().remove(textarea);
-    	textframe.getContentPane().add(textarea, BorderLayout.WEST);
     }
     
 	@Override
@@ -154,9 +134,7 @@ public class Game implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		//System.out.println("k");
 		if(e.getKeyChar() == '\n') {
-			//System.out.println("Pressed");
 			readstring = typearea.getText();
 			if(readstring.length() > 1) {
 				readstring = readstring.substring(0, readstring.length()-1);

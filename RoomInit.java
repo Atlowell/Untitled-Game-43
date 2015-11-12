@@ -1,8 +1,10 @@
 
 public class RoomInit {
 	
-	public static Room[] initRooms() {
-		Room[] rooms = new Room[16];
+	public static int ROW = 4;
+	public static Room[] rooms;
+	public static void initRooms() {
+		rooms = new Room[ROW * ROW];
 		rooms[0] = initRoom1();
 		rooms[1] = initRoom2();
 		rooms[2] = initRoom3();
@@ -19,11 +21,11 @@ public class RoomInit {
 		rooms[13] = initRoom14();
 		rooms[14] = initRoom15();
 		rooms[15] = initRoom16();
-		return rooms;
 	}
 	
 	private static Room initRoom1() {
 		Room room1 = new Room(1);
+		//System.out.println(room1.toString());
 		room1.map[2] = "*   x   *       *       *       *";
 		room1.addLoot(new Armor("Dev Armor", 0));
 		return room1;
