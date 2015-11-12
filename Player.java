@@ -1,19 +1,29 @@
 
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+
+import javax.swing.JTextArea;
 
 public class Player {
 	
 	/// GLOBAL VARIABLES ///
 	private String name;
 	private int ap;
+	private int apmod = 0;
 	private ArrayList<Loot> inventory;
 	private ArrayList<Weapon> weapons;
 	private ArrayList<Armor> armor;
 	private ArrayList<Consumable> cons;
 	private int hp = 10;
+	private int hpmod = 0;
 	private int attack;
+	private int attackmod = 0;
 	private int hitchance = 8;
+	
+	private Thread thread3;
+	//private JTextArea typearea;
 
 	
 	/// CONSTRUCTOR ///
@@ -95,19 +105,19 @@ public class Player {
 	
 	/// GETTERS AND SETTERS ///
 	public int getAP() {
-		return ap;
+		return ap + apmod;
 	}
 
 	public int getAttack() {
-		return attack;
+		return attack + attackmod;
 	}
 
 	public int getHP() {
-		return hp;
+		return hp + hpmod;
 	}
 
 	public void setHP(int hp) {
-		this.hp = hp;
+		this.hp = hp - hpmod;
 	}
 
 
@@ -124,6 +134,29 @@ public class Player {
 		return name;
 	}
 	
+	public void setHPMod(int hpm) {
+		hpmod = hpm;
+	}
+	
+	public int getHPMod() {
+		return hpmod;
+	}
+	
+	public void setAPMod(int apm) {
+		apmod = apm;
+	}
+	
+	public int getAPMod() {
+		return apmod;
+	}
+	
+	public void setAttackMod(int atkm) {
+		attackmod = atkm;
+	}
+	
+	public int getAttackMod() {
+		return attackmod;
+	}
 	
 	public Consumable findCons(String s) {
 		for(int i = 0; i < cons.size(); i++) {
@@ -153,32 +186,6 @@ public class Player {
 		return null;
 	}
 	
-	public void applyEffect(Effect ef) {
-		Thread thread2;
-		Runnable time = new Runnable() {
-			@Override
-			public void run() {
-				//synchronized(thread2) {
-					hp+= ef.getHMod();
-					ap+= ef.getAPMod();
-					attack+= ef.getAttackMod();
-					System.out.println("You have consumed a consumable.");
-					try {
-					Thread.sleep(1000 * ef.getDuration());
-					}
-					catch(InterruptedException e) {
-						e.printStackTrace();
-					}
-					hp-= ef.getHMod();
-					ap-= ef.getAPMod();
-					attack-= ef.getAttackMod();
-					System.out.println("The consumable has worn off");
-				//}
-			}
-		};
-		thread2 = new Thread(time);
-		thread2.start();
-	}
 	
 	public void getInventory() {
 		System.out.println("");
@@ -227,4 +234,25 @@ public class Player {
 			System.out.println("Your Consumables Bag is empty.");
 		}
 	}
+	
+	 /*@Override
+	public void keyPressed(KeyEvent e) {
+			
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+			
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		if(e.getKeyChar() == '\n') {
+			//System.out.println("Pressed");
+			synchronized(thread3)
+		    {
+				thread3.notify();
+		    } 
+		}
+	} */
 }

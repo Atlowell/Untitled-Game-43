@@ -48,13 +48,13 @@ public class RoomInit {
 	private static Room initRoom4() {
 		Room room4 = new Room(4);
 		room4.map[2] = "*       *       *       *   x   *";
-		room4.addLoot(new Consumable("Mundane Potion", new Effect(1, 1, 1, 5)));
+		room4.addLoot(new Consumable("Mundane Potion", new Effect(1, 0, 0, 15)));
 		return room4;
 	}
 	
 	private static Room initRoom5() {
 		Room room5 = new Room(5);
-		room5.addMonster(new Air());
+		//room5.addMonster(new Air());
 		room5.map[6] = "*   x   *       *       *       *";
 		return room5;
 	}

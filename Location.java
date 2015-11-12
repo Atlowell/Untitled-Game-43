@@ -22,6 +22,7 @@ public class Location extends JFrame implements KeyListener {
     private JTextArea typearea;
     private Runnable r;
     private int room = 1;
+    private boolean ex = false;
  
     private Room[] rooms;
     
@@ -156,7 +157,8 @@ public class Location extends JFrame implements KeyListener {
     				}
     				else {
     					System.out.println("You fought in vain but in the end, the monsters of this strange realm were too much for you.\nYou have died.  Game over.");
-    					System.out.println("Type Anything to quit");
+    					System.out.println("Press enter to quit");
+    					ex = true;
     					thread1 = new Thread(r);
     					thread1.run();
     					System.exit(0);
@@ -167,13 +169,15 @@ public class Location extends JFrame implements KeyListener {
     			if(c.flee()) {
     				p = c.getPlayer();
     				System.out.println("You have successfully fled back to room " + room + ".");
+    				c.getMonster().setHP(c.getMonster().MAXHEALTH);
     				fleeroom(room);
     			}
     			else {
     				if(c.getWinner() == null);
     				else if(c.getWinner() == false) {
     					System.out.println("The monster's hit was enough to mortally wound you.  Your life draws to a close.\nGame over.");
-    					System.out.println("Type Anything to quit");
+    					System.out.println("Press enter to quit");
+    					ex = true;
     					thread1 = new Thread(r);
     					thread1.run();
     					System.exit(0);
@@ -245,9 +249,67 @@ public class Location extends JFrame implements KeyListener {
     		System.out.println("No such consumable found.");
     	}
     	else {
-    		p.applyEffect(co.getEffect());
+    		applyEffect(co.getEffect());
+    		
     	}
     }
+    
+    public void applyEffect(Effect ef) {
+		if(ef.getDuration() == 0) {
+			p.setHPMod(p.getHPMod() + ef.getHMod());
+			p.setAPMod(p.getAPMod() + ef.getAPMod());
+			p.setAttackMod(p.getAttackMod() + ef.getAttackMod());
+			return;
+		}
+		//typearea.addKeyListener(this);
+		Thread thread2;
+		Runnable time = new Runnable() {
+			@Override
+			public void run() {
+				//synchronized(thread2) {
+					p.setHPMod(p.getHPMod() + ef.getHMod());
+					p.setAPMod(p.getAPMod() + ef.getAPMod());
+					p.setAttackMod(p.getAttackMod() + ef.getAttackMod());
+					System.out.println("You have consumed a consumable.");
+					try {
+						Thread.sleep(1000 * ef.getDuration());
+					}
+					catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+					p.setHPMod(p.getHPMod() - ef.getHMod());
+					p.setAPMod(p.getAPMod() - ef.getAPMod());
+					p.setAttackMod(p.getAttackMod() - ef.getAttackMod());
+					System.out.println("The consumable has worn off");
+					if(p.getHP() <= 0) {
+						System.out.println("As the effects of the consumable wear off, you realize they were the only thing keeping you alive.  You have perished.\nGame over.");
+						Runnable r = new Runnable() {
+							@Override
+							public void run() {
+								synchronized(thread1) {
+									try 
+									{
+										thread1.wait();
+										//System.out.println("TEEEEEEEEEEST");
+									} 
+									catch (InterruptedException e) 
+									{
+										e.printStackTrace();
+									}
+								}
+				     		}
+				    	};
+				    	System.out.println("Press enter to exit");
+				    	ex = true;
+				    	thread1 = new Thread(r);    					
+				    	thread1.run();
+				    	System.exit(0);
+					} 
+			}
+		};
+		thread2 = new Thread(time);
+		thread2.start();
+	}
     
     public void square1() {
         rooms[0].printMap();
@@ -269,7 +331,7 @@ public class Location extends JFrame implements KeyListener {
        		System.out.println("Which way would you like to go?");
        		thread1 = new Thread(r);
             //thread1.start();
-       		thread1.run(); //TODO: HERE
+       		thread1.run();
        		if (s.equalsIgnoreCase("d")) {
        			System.out.println("\033[31;1mYou have chosen to go east.\033[0m");
        			room = 1;
@@ -1443,7 +1505,15 @@ public class Location extends JFrame implements KeyListener {
 	            } 
 			}
 			else {
-				System.out.println("Invalid input, try again");
+				if(ex) {
+					synchronized(thread1)
+		            {
+						thread1.notify();
+		            } 
+				}
+				else {
+					System.out.println("Invalid input, try again");
+				}
 			}
 			
 			typearea.setText("");
