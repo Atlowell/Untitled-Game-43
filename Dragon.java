@@ -3,6 +3,7 @@ import java.util.Hashtable;
 public class Dragon extends Monster {
 
     public Dragon() {
+    	MAXHEALTH = 120;
         name = "Dragon";
         description = "The dragon's muscles flex under it's amethyst-like scales; a majestic creature, this one is.";
         attack = 15;

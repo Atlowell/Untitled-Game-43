@@ -3,6 +3,7 @@ import java.util.Hashtable;
 public class WildDog extends Monster {
 
     public WildDog() {
+    	MAXHEALTH = 4;
         name = "Wild Dog";
         description = "Foam appears to be forming around it's mouth...perhaps we shouldn't agitate it?";
         attack = 1;

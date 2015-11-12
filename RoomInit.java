@@ -25,12 +25,13 @@ public class RoomInit {
 	private static Room initRoom1() {
 		Room room1 = new Room(1);
 		room1.map[2] = "*   x   *       *       *       *";
+		room1.addLoot(new Armor("Dev Armor", 0));
 		return room1;
 	}
 	
 	private static Room initRoom2() {
 		Room room2 = new Room(2);
-		room2.addMonster(new Rat());
+		room2.addMonster(new BlackKnight());
 		//room2.addLoot(new Weapon("David", 999));
 		room2.map[2] = "*       *   x   *       *       *";
 		return room2;

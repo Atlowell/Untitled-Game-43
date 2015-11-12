@@ -45,10 +45,10 @@ public class Game implements KeyListener {
     	   textarea.setMargin(new Insets(5,5,5,5));
     	   JScrollPane scrollpane = new JScrollPane(textarea);
     	   scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    	   scrollpane.setPreferredSize(new Dimension(400, 400));
+    	   scrollpane.setPreferredSize(new Dimension(600, 600));
     	   scrollpane.setBorder(BorderFactory.createLineBorder(Color.black));
     	   typearea = new JTextArea();
-    	   typearea.setPreferredSize(new Dimension(400,20));
+    	   typearea.setPreferredSize(new Dimension(600,20));
     	   typearea.setBorder(BorderFactory.createLineBorder(Color.black));
     	   typearea.addKeyListener(this);
     	   textframe.getContentPane().add(scrollpane, BorderLayout.WEST);

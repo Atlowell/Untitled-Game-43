@@ -18,20 +18,33 @@ public class Combat {
 		if(Math.random() * 10 < pl.getHitChance()) {
 			mo.setHP(mo.getHP()-pl.getAttack());
 			System.out.println("You swing at the " + mo.getName() + " and hit!");
+			if(mo.getHP() <= 0) {
+				return true;
+			}
+			if((float)mo.getHP()/(float)mo.MAXHEALTH > .7) {
+				System.out.println("The " + mo.getName() + " does not look very harmed");
+			}
+			else if((float)mo.getHP()/(float)mo.MAXHEALTH > .3) {
+				System.out.println("The " + mo.getName() + " looks fairly roughed up");
+			}
+			else {
+				System.out.println("The " + mo.getName() + " looks badly injured");
+			}
 		}
 		else {
 			System.out.println("You swing at the " + mo.getName() + " but miss!");
 		}
-		if(mo.getHP() <= 0) {
-			return true;
-		}
 		if(Math.random() * 10 < mo.getHitChance()) {
-			if(pl.getAP() < mo.getAttack()) {
-				pl.setHP(pl.getHP()-mo.getAttack() + pl.getAP());
-				System.out.println("The " + mo.getName() + " swings at you and hits!");
+			if(pl.getAP() >= mo.getAttack() + 2) {
+				System.out.println("The " + mo.getName() + "'s attacks bounce off your armor harmlessly");
+			}
+			else if(pl.getAP() >= mo.getAttack() - 1) {
+				pl.setHP(pl.getHP() - 1);
+				System.out.println("The " + mo.getName() + " swings at you and hits, but your armor blocks the brunt of the attack");
 			}
 			else {
-				System.out.println("The " + mo.getName() + " swings at you and hits, but its attack bounces harmlessly off of your armor!");
+				pl.setHP(pl.getHP() + pl.getAP() - mo.getAttack());
+				System.out.println("The " + mo.getName() + " swings at you and hits!");
 			}
 		}
 		else {
@@ -51,7 +64,20 @@ public class Combat {
 		}
 		else {
 			if(Math.random() * 10 < mo.getHitChance()) {
-				pl.setHP(pl.getHP()-mo.getAttack());
+				if(pl.getAP() >= mo.getAttack() + 4) {
+					System.out.println("You attempt to flee but fail.  The " + mo.getName() + " attacks you but his attacks bounce off your armor harmlessly.");
+				}
+				else if(pl.getAP() >= mo.getAttack() - 1) {
+					pl.setHP(pl.getHP() - 1);
+					System.out.println("You attempt to flee but fail.  The " + mo.getName() + " attacks you, but your armor blocks the brunt of the attack.");
+				}
+				else {
+					pl.setHP(pl.getHP() + pl.getAP() - mo.getAttack());
+					System.out.println("You attempt to flee but fail.  The " + mo.getName() + " attacks you while you flee and hits!");
+				}
+			}
+			else {
+				System.out.println("You attempt to flee but fail.  The " + mo.getName() + " attacks you while you flee but misses.");
 			}
 			return false;
 		}

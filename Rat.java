@@ -5,6 +5,7 @@ import java.util.Hashtable;
 public class Rat extends Monster {
 
 	public Rat() {
+		MAXHEALTH = 1;
 		name = "Rat";
 		description = "A harmless rat.";
 		attack = 0;

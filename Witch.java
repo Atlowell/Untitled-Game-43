@@ -17,6 +17,7 @@ import java.util.Hashtable;
 public class Witch extends Monster {
 
     public Witch() {
+    	MAXHEALTH = 12;
         name = "Witch";
         description = "A ghastly looking individual with teeth like broken glass; she seems to be staring into your\nsoul...";
         attack = 3;

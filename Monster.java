@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 public class Monster {
 	
+	public int MAXHEALTH;
 	protected int health;
 	protected String name;
 	protected String description;

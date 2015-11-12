@@ -4,6 +4,7 @@ import java.util.Hashtable;
 public class Air extends Monster {
 	
 	public Air() {
+		MAXHEALTH = 1;
 		name = "Air";
 		description = "The very air itself comes to life to attack you";
 		attack = 1;

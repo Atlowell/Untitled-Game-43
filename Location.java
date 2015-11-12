@@ -111,6 +111,7 @@ public class Location extends JFrame implements KeyListener {
     
     private void combat(Monster m) {
     	System.out.println("You have encounted a " + m.name + "!");
+    	System.out.println("Your Health is " + p.getHP());
     	Combat c = new Combat(p, m);
     	while(true) {
     		System.out.println("Fight or flee?");
@@ -155,7 +156,9 @@ public class Location extends JFrame implements KeyListener {
     				}
     				else {
     					System.out.println("You fought in vain but in the end, the monsters of this strange realm were too much for you.\nYou have died.  Game over.");
-    					//in.close();
+    					System.out.println("Type Anything to quit");
+    					thread1 = new Thread(r);
+    					thread1.run();
     					System.exit(0);
     				}
     			}
@@ -167,13 +170,15 @@ public class Location extends JFrame implements KeyListener {
     				fleeroom(room);
     			}
     			else {
-    				if(c.getWinner() == null) {
-    					System.out.println("You could not escape!  The " + m.getName() + " hits you!  Your health is now " + c.getPlayer().getHP());
-    				}
+    				if(c.getWinner() == null);
     				else if(c.getWinner() == false) {
-    					System.out.println("As you attempt to flee, the " + m.getName() + " strikes you and you fall.  Your life draws to a close.\nGame over.");
-    					//in.close();
+    					System.out.println("The monster's hit was enough to mortally wound you.  Your life draws to a close.\nGame over.");
+    					System.out.println("Type Anything to quit");
+    					thread1 = new Thread(r);
+    					thread1.run();
+    					System.exit(0);
     				}
+    				System.out.println("Your health is now " + c.getPlayer().getHP());
     			}
     		}
     	}
